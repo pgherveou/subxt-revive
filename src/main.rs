@@ -1,12 +1,13 @@
 #![allow(unused_imports)]
 
 use subxt::{
-    OnlineClient, PolkadotConfig, backend::rpc::RpcClient,
-    config::PolkadotConfig as SrcChainConfig, ext::subxt_rpcs::LegacyRpcMethods,
-    storage::DynamicAddress,
+    backend::rpc::RpcClient, config::PolkadotConfig as SrcChainConfig,
+    ext::subxt_rpcs::LegacyRpcMethods, storage::DynamicAddress, OnlineClient, PolkadotConfig,
 };
 use subxt_signer::sr25519::dev;
 
+// Generated with subxt-cli (cargo install subxt-cli)
+// subxt metadata --url ws://localhost:9944 --version 15  > revive_chain.metadata
 #[subxt::subxt(runtime_metadata_path = "revive_chain.metadata")]
 pub mod polkadot {}
 
@@ -37,7 +38,7 @@ async fn main() -> anyhow::Result<()> {
         .await?
         .wait_for_finalized()
         .await?;
-    
+
     println!("Transaction finalized: {:?}", res.extrinsic_hash());
     Ok(())
 }
